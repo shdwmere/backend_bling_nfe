@@ -1,6 +1,8 @@
 const express = require('express');
 require('dotenv').config();
 
+const blingRoutes = require('../routes/bling');
+
 const app = express();
 
 // Parser JSON básico
@@ -22,5 +24,8 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+
+// Rotas da API Bling
+app.use('/api/bling', blingRoutes);
 
 module.exports = app;
