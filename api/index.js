@@ -7,7 +7,6 @@ require('dotenv').config();
 const blingRoutes = require('../routes/bling');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
 // Middlewares de segurança
 app.use(helmet());
@@ -74,14 +73,6 @@ app.use('*', (req, res) => {
     path: req.originalUrl,
     method: req.method
   });
-});
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
-  console.log(`📍 Health check: http://localhost:${PORT}/health`);
-  console.log(`🔗 API Bling: http://localhost:${PORT}/api/bling`);
-  console.log(`🌍 Ambiente: ${process.env.NODE_ENV || 'development'}`);
 });
 
 module.exports = app;
