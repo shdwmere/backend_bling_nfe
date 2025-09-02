@@ -2,10 +2,10 @@
   "name": "bling-nfe-backend",
   "version": "1.0.0",
   "description": "Backend API para integração com Bling NFe",
-  "main": "server.js",
+  "main": "api/index.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
+    "dev": "nodemon api/index.js",
+    "start": "node api/index.js",
     "build": "echo 'Build completed'"
   },
   "dependencies": {
