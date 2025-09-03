@@ -244,9 +244,8 @@ router.post('/create-nfe', async (req, res) => {
 
     console.log('📝 Criando NFe com dados completos...');
 
-    // Gera código único para evitar conflitos
+    // Gera timestamp para códigos únicos
     const timestamp = Date.now();
-    const codigoProduto = `PROD_${timestamp}`;
 
     // Busca o maior número de NFe existente
     let proximoNumero = 500; // Fallback maior para evitar conflitos
@@ -308,29 +307,43 @@ router.post('/create-nfe', async (req, res) => {
         }
       },
 
-      // Item da nota
-      itens: [
+      // Itens da nota (suporte a múltiplos produtos)
+      itens: (nfeData.produtos && nfeData.produtos.length > 0 ? nfeData.produtos : [
         {
-          codigo: codigoProduto,
-          descricao: nfeData.nomeProduto,
-          unidade: "UN",
-          quantidade: 1,
+          nome: nfeData.nomeProduto,
           valor: nfeData.valor,
+          quantidade: 1,
+          unidade: 'UN'
+        }
+      ]).map((produto, index) => {
+        const codigoProduto = `PROD_${timestamp}_${index + 1}`;
+        return {
+          codigo: codigoProduto,
+          descricao: produto.nome || produto.nomeProduto,
+          unidade: produto.unidade || "UN",
+          quantidade: produto.quantidade || 1,
+          valor: produto.valor,
           
           // Dados básicos do produto
           item: {
             codigo: codigoProduto,
-            descricao: nfeData.nomeProduto,
+            descricao: produto.nome || produto.nomeProduto,
             tipo: "P",
             situacao: "A",
-            unidade: "UN",
-            preco: nfeData.valor,
+            unidade: produto.unidade || "UN",
+            preco: produto.valor,
             classificacaoFiscal: "00000000"
           }
-        }
-      ],
+        };
+      }),
 
-      observacoes: `NFe criada automaticamente\nCliente: ${nfeData.nome}\nProduto: ${nfeData.nomeProduto}\nValor: R$ ${nfeData.valor.toFixed(2)}`
+      observacoes: `NFe criada automaticamente\nCliente: ${nfeData.nome}\n${
+        nfeData.produtos && nfeData.produtos.length > 0 
+          ? `Produtos (${nfeData.produtos.length}):\n${nfeData.produtos.map((p, i) => 
+              `${i + 1}. ${p.nome} - Qtd: ${p.quantidade} - Valor: R$ ${parseFloat(p.valor).toFixed(2)}`
+            ).join('\n')}\nTotal: R$ ${nfeData.produtos.reduce((total, p) => total + (parseFloat(p.valor) * parseInt(p.quantidade)), 0).toFixed(2)}`
+          : `Produto: ${nfeData.nomeProduto}\nValor: R$ ${nfeData.valor.toFixed(2)}`
+      }`
     };
 
     console.log('📦 Payload NFe completo preparado');
