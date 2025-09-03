@@ -15,7 +15,7 @@ export class BlingAPI {
   getAuthorizationUrl(state = 'default_state') {
     const params = new URLSearchParams({
       response_type: 'code',
-      client_id: import.meta.env.VITE_BLING_CLIENT_ID || '',
+      client_id: import.meta.env.CLIENT_ID || '',
       state,
       redirect_uri: `${API_BASE_URL}/api/bling/callback`
     });
