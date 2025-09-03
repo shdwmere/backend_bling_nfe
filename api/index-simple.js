@@ -53,13 +53,13 @@ app.get('/health', (req, res) => {
 app.get('/debug', (req, res) => {
   res.json({
     nodeEnv: process.env.NODE_ENV,
-    blingClientIdExists: !!process.env.BLING_CLIENT_ID,
+    blingClientIdExists: !!process.env.CLIENT_ID,
     blingClientSecretExists: !!process.env.BLING_CLIENT_SECRET,
     blingBaseUrl: process.env.BLING_BASE_URL,
     allowedOrigins: process.env.ALLOWED_ORIGINS,
     frontendUrl: process.env.FRONTEND_URL,
     // NUNCA mostrar os valores reais em produção
-    blingClientIdFirst10: process.env.BLING_CLIENT_ID?.substring(0, 10)
+    blingClientIdFirst10: process.env.CLIENT_ID?.substring(0, 10)
   });
 });
 
