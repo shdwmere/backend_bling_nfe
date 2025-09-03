@@ -62,7 +62,7 @@ router.post('/token', async (req, res) => {
     console.log('🔄 Trocando código por tokens...');
 
     // Prepara credenciais para Basic Auth
-    const credentials = `${process.env.BLING_CLIENT_ID}:${process.env.BLING_CLIENT_SECRET}`;
+    const credentials = `${process.env.CLIENT_ID}:${process.env.BLING_CLIENT_SECRET}`;
     const credentialsB64 = Buffer.from(credentials).toString('base64');
 
     // Dados para trocar código por tokens
@@ -130,7 +130,7 @@ router.post('/refresh', async (req, res) => {
     const tokenData = new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: refresh_token,
-      client_id: process.env.BLING_CLIENT_ID,
+      client_id: process.env.CLIENT_ID,
       client_secret: process.env.BLING_CLIENT_SECRET
     });
 

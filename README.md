@@ -42,14 +42,14 @@ npm i -g vercel
 vercel
 
 # Configurar variáveis de ambiente na Vercel
-vercel env add BLING_CLIENT_ID
+vercel env add CLIENT_ID
 vercel env add BLING_CLIENT_SECRET
 vercel env add BLING_BASE_URL
 vercel env add ALLOWED_ORIGINS
 ```
 
 ### 3. Configurar variáveis de ambiente na Vercel:
-- `BLING_CLIENT_ID`: Seu Client ID do Bling
+- `CLIENT_ID`: Seu Client ID do Bling
 - `BLING_CLIENT_SECRET`: Seu Client Secret do Bling  
 - `BLING_BASE_URL`: https://bling.com.br/Api/v3
 - `ALLOWED_ORIGINS`: URLs do seu frontend (separadas por vírgula)

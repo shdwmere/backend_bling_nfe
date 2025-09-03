@@ -95,7 +95,7 @@ npm install
 vercel
 
 # Variáveis de ambiente configuradas:
-BLING_CLIENT_ID=40f4dc7c6b9be201808cb9ab54d7e1894e850d55
+CLIENT_ID=40f4dc7c6b9be201808cb9ab54d7e1894e850d55
 BLING_CLIENT_SECRET=b10261fc7fb98f87ebb227c601cdb4cd4d940ac50cec8090a28c2be1b324
 BLING_BASE_URL=https://bling.com.br/Api/v3
 ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
