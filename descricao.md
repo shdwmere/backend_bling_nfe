@@ -18,7 +18,7 @@ Este backend foi desenvolvido como um **intermediário seguro** entre aplicaçõ
 ```
 backend_bling_nfe/
 ├── api/
-│   └── index-simple.js     # Função serverless principal
+│   └── index.js     # Função serverless principal
 ├── routes/
 │   └── bling.js           # Rotas da API Bling
 ├── frontend/              # Frontend de exemplo (Vite React)
