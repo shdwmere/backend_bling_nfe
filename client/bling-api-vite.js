@@ -4,7 +4,7 @@
 import axios from 'axios';
 
 // 🔧 CONFIGURAR A URL DA SUA API BACKEND DEPLOYADA NA VERCEL
-const API_BASE_URL = 'https://sua-api-backend.vercel.app'; // ⚠️ TROCAR PELA URL REAL
+const API_BASE_URL = 'https://backend-bling-nfe.vercel.app';
 
 export class BlingAPI {
   static STORAGE_KEY = 'bling_auth_state';
