@@ -344,7 +344,7 @@ router.post('/create-nfe', async (req, res) => {
             situacao: "A",
             unidade: produto.unidade || "UN",
             preco: produto.valor,
-            classificacaoFiscal: "00000000"
+            classificacaoFiscal: produto.ncm || produto.classificacaoFiscal || "00000000"
           }
         };
       }),
