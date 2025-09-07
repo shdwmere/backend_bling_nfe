@@ -335,6 +335,7 @@ router.post('/create-nfe', async (req, res) => {
           unidade: produto.unidade || "UN",
           quantidade: produto.quantidade || 1,
           valor: produto.valor,
+          classificacaoFiscal: produto.ncm || produto.classificacaoFiscal || "00000000", // NCM direto no item
           
           // Dados básicos do produto
           item: {
