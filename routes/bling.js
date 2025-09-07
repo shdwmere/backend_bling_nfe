@@ -236,9 +236,21 @@ router.post('/create-nfe', async (req, res) => {
       });
     }
 
-    if (!nfeData || !nfeData.numeroDocumento || !nfeData.nome || !nfeData.nomeProduto || !nfeData.valor) {
+    // Flexibiliza validação para aceitar diferentes formatos
+    const documento = nfeData.numeroDocumento || nfeData.documento;
+    const nome = nfeData.nome;
+    const temProdutos = nfeData.produtos && nfeData.produtos.length > 0;
+    const temProdutoUnico = nfeData.nomeProduto && nfeData.valor;
+    
+    if (!nfeData || !documento || !nome || (!temProdutos && !temProdutoUnico)) {
       return res.status(400).json({
-        error: 'Dados obrigatórios: nome, documento, produto e valor'
+        error: 'Dados obrigatórios: nome, documento, e produtos (array) ou produto único (nomeProduto + valor)',
+        received: {
+          nome: !!nome,
+          documento: !!documento,
+          produtos: nfeData.produtos?.length || 0,
+          produtoUnico: !!temProdutoUnico
+        }
       });
     }
 
@@ -286,23 +298,23 @@ router.post('/create-nfe', async (req, res) => {
       tipo: 1, // Saída
       situacao: 1, // Em digitação (rascunho)
       
-      // Dados completos do cliente
+      // Dados completos do cliente (flexibiliza campos)
       contato: {
         nome: nfeData.nome,
-        tipoPessoa: nfeData.tipoPessoa,
-        numeroDocumento: nfeData.numeroDocumento.replace(/\D/g, ''),
-        ie: nfeData.inscricaoEstadual || '',
-        contribuinte: nfeData.contribuinte,
-        telefone: nfeData.telefone || '',
+        tipoPessoa: nfeData.tipoPessoa || 'J',
+        numeroDocumento: (documento || '').replace(/\D/g, ''),
+        ie: nfeData.inscricaoEstadual || nfeData.inscricaoEstaduall || '',
+        contribuinte: nfeData.contribuinte || 1,
+        telefone: nfeData.telefone || nfeData.telefones || '',
         email: nfeData.email || '',
         endereco: {
-          endereco: nfeData.endereco,
-          bairro: nfeData.bairro,
-          municipio: nfeData.cidade,
+          endereco: nfeData.endereco || '',
+          bairro: nfeData.bairro || '',
+          municipio: nfeData.cidade || '',
           numero: nfeData.numero || 'S/N',
-          complemento: nfeData.complemento || '',
-          cep: nfeData.cep.replace(/\D/g, ''),
-          uf: nfeData.uf,
+          complemento: nfeData.complemento || nfeData.complementos || '',
+          cep: (nfeData.cep || '').replace(/\D/g, ''),
+          uf: nfeData.uf || '',
           pais: 'Brasil'
         }
       },
