@@ -32,7 +32,7 @@ Crie `.env` na raiz com:
 BLING_CLIENT_ID=seu_client_id_aqui
 BLING_CLIENT_SECRET=seu_client_secret_aqui
 BLING_BASE_URL=https://bling.com.br/Api/v3
-ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
+ALLOWED_ORIGINS=http://localhost:5173
 FRONTEND_URL=http://localhost:5173
 ```
 
